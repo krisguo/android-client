@@ -185,7 +185,7 @@ class App : MultiDexApplication() {
         cookieCache = SetCookieCache()
 
         val defaultUrlConfig = UrlConfig(BuildConfig.API_URL, BuildConfig.STORAGE_URL,
-                BuildConfig.KYC_URL, BuildConfig.TERMS_URL)
+                BuildConfig.KYC_URL, BuildConfig.TERMS_URL, BuildConfig.APP_HOST)
 
         stateComponent = DaggerAppStateComponent.builder()
                 .appModule(AppModule(this))

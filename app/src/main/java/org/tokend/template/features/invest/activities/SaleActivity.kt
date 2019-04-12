@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.RelativeLayout
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.layout_sale_picture.*
 import org.jetbrains.anko.browse
 import org.jetbrains.anko.onClick
 import org.tokend.sdk.utils.BigDecimalUtil
+import org.tokend.template.BuildConfig
 import org.tokend.template.R
 import org.tokend.template.activities.BaseActivity
 import org.tokend.template.data.model.OfferRecord
@@ -136,6 +139,33 @@ class SaleActivity : BaseActivity() {
 
     private fun initFields() {
         investAmountWrapper = AmountEditTextWrapper(amount_edit_text)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.share, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.share -> shareData()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun shareData() {
+        val url = "${urlConfigProvider.getConfig().appHost}funds/${sale.id}/campaign"
+        val shareText = "${sale.name}\n$url"
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+                .apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    type = "text/plain"
+                    putExtra(android.content.Intent.EXTRA_SUBJECT,
+                            getString(R.string.app_name))
+                    putExtra(Intent.EXTRA_TEXT, shareText)
+                }
+
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_sale)))
     }
 
     // region Update

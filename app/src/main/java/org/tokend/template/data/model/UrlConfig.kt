@@ -12,7 +12,9 @@ data class UrlConfig(
         @SerializedName("kyc")
         private val mKyc: String,
         @SerializedName("terms")
-        private val mTerms: String
+        private val mTerms: String,
+        @SerializedName("host")
+        private val mAppHost: String
 ) : Serializable {
     val api: String
         get() = mApi
@@ -36,6 +38,11 @@ data class UrlConfig(
 
     val apiDomain: String
         get() = HttpUrl.parse(api)?.host() ?: api
+
+    val appHost: String
+        get() = mAppHost
+                .addTrailSlashIfNeeded()
+                .addProtocolIfNeeded()
 
     private fun String.addTrailSlashIfNeeded(): String {
         return if (this.endsWith('/')) this else this + "/"

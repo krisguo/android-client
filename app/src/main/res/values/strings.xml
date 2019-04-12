@@ -396,4 +396,6 @@
     <string name="max_sell_hint">Max Sell</string>
     <string name="max_buy_hint">Max Buy</string>
     <string name="error_amount_to_big">Amount is to big</string>
+
+    <string name="share_sale">Share Sale</string>
 </resources>

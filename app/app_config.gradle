@@ -145,6 +145,7 @@ ext.applyAppConfig = { buildConfig ->
     b.buildConfigField 'String', 'STORAGE_URL', "\"${storage_url}\""
     b.buildConfigField 'String', 'TERMS_URL', "\"${terms_url}\""
     b.buildConfigField 'String', 'KYC_URL', "\"${kyc_url}\""
+    b.buildConfigField 'String', 'APP_HOST', "\"${app_host}\""
     b.buildConfigField 'Boolean', 'WITH_LOGS', "${logs_enabled}"
 
     b.buildConfigField 'Boolean', 'SECURE_CONTENT', "${secure_content}"
